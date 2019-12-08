@@ -1,0 +1,12 @@
+Package: aswp
+Title: An opinionated LaTeX template for R Markdown working papers
+Version: 0.0.0.9000
+Authors@R:
+    person(given = "András",
+           family = "Svraka",
+           role = c("aut", "cre"),
+           email = "svraka.andras@gmail.com")
+Description: A LaTeX template for working papers with bells and whistles: beautiful typography, nice defaults, and some convenience functions.
+License: What license it uses
+Encoding: UTF-8
+LazyData: true
