@@ -4,8 +4,7 @@
 \alias{aswp}
 \title{An opinionated LaTeX template for R Markdown working papers}
 \usage{
-aswp(..., toc = FALSE, keep_tex = TRUE,
-  citation_package = "biblatex")
+aswp(..., toc = FALSE, keep_tex = TRUE)
 }
 \arguments{
 \item{...}{Additional arguments to
@@ -14,10 +13,6 @@ aswp(..., toc = FALSE, keep_tex = TRUE,
 \item{toc}{\code{TRUE} to include a table of contents in the output}
 
 \item{keep_tex}{Keep the intermediate tex file used in the conversion to PDF}
-
-\item{citation_package}{The LaTeX package to process citations,
-\code{natbib} or \code{biblatex}. Use \code{none} if neither
-package is to be used. This format defaults to \code{biblatex}.}
 }
 \value{
 R Markdown output format to pass to \code{\link{render}}
