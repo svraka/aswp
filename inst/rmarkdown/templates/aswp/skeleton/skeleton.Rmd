@@ -1,0 +1,37 @@
+---
+title: Your Title
+author:
+  - name: Your Name
+    affiliation: Institute of Whatever, <name@institute.gov>
+  - name: Second Author
+    affiliation: Company, Inc., <name@company.com>
+date: \today
+abstract: |
+  Your abstract...
+thanks: |
+  Thanks...
+output: aswp::aswp
+---
+
+Write your introduction here, preferably without its own section title
+
+# First section
+
+Continue here.
+
+# Conclusion
+
+The main part ends here. If you have references but no appendix, delete everything below. Otherwise add content under the Appendix headings.
+
+# References {-}
+
+<div id="refs"></div>
+
+\appendix
+\clearpage
+
+# Appendix
+
+This is the appendix.
+
+## Subsection
