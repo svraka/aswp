@@ -22,7 +22,8 @@ aswp <- function(...,
                                 toc = toc,
                                 template = template,
                                 keep_tex = keep_tex,
-                                latex_engine = "xelatex")
+                                latex_engine = "xelatex",
+                                pandoc_args = "--metadata=link-citations")
 
   base
 }
