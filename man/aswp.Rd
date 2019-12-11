@@ -15,7 +15,7 @@ aswp(..., toc = FALSE, keep_tex = TRUE)
 \item{keep_tex}{Keep the intermediate tex file used in the conversion to PDF}
 }
 \value{
-R Markdown output format to pass to \code{\link{render}}
+R Markdown output format to pass to \code{\link[rmarkdown]{render}}
 }
 \description{
 A template suitable for working paperes written in R Markdown. It
