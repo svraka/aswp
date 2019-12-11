@@ -28,4 +28,5 @@ Now write your paper!
 
 Then knit and compile like any other R Markdown document. [TinyTeX](https://yihui.org/tinytex/) should automatically take care of the missing LaTeX packages.
 
-This package builds on [bookdown](https://github.com/rstudio/bookdown) to produce a single long-form document. This means chapters are not available but other bookdown features, like numbering and cross-referencing figures/tables/equations are.
+See the [vignette](vignette/aswp.Rmd) for more details and how to set up a template for en entire paper.
+

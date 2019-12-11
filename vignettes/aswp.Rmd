@@ -1,0 +1,100 @@
+---
+title: "`aswp`: An opinionated LaTeX template for R Markdown working papers"
+subtitle: A Short Introduction
+author:
+  - name: András Svraka
+    affiliation: |
+      This is from the optional `affiliation` field. It's just an
+      unnumbered footnote for each author. Besides affiliation, you
+      can put e.g. contact information here.
+date: \today
+thanks: |
+  This is from the optional `thanks` field. Use this to add further notes that do
+  not not belong to any specific author. I'm standing on the shoulders
+  of giants.
+abstract: |
+  This short vignette  shows all the features of this R Markdown template.
+bibliography: aswp.bib
+keywords: [R Markdown, Reproducible research, Typography]
+jel: [C88, Y20]
+output: aswp::aswp
+
+# The following section is required for vignettes. Don't use it for
+# other documents.
+vignette: >
+  %\VignetteIndexEntry{aswp}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# First steps
+
+This package provides an `aswp()` function which is an R Markdown document format creator. To use it, you need to add `aswp::aswp` to the `output` field in the YAML metadata block of your R Markdown file .
+
+The recommended way to use this template is however by importing it into your editor of choice. This helps setting up a more complex document with references and appendices which are often used in research papers.
+
+  * In RStudio, open a new R Markdown document (**File** → **New File** and choose **R Markdown**) and select this template ("Working Paper") under **From Template**.
+  * In Emacs, use `poly-r-rmarkdown-create-from-template` with [Polymode](http://polymode.github.io/), which is also available from the iESS menu.
+
+This provides a basic skeleton for the most important, and non-obvious features.
+
+# R Markdown {#sec:rmarkdown}
+
+All the usual R Markdown features work.
+
+```{r deom}
+lm(mpg ~ disp + gear + carb, data = mtcars)
+```
+
+This package builds on [bookdown](https://github.com/rstudio/bookdown) to produce a single long-form document. This means chapters are not available but you can use cross-references with the `\@ref(...)` syntax for [equations](https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html#equations) and [text references](https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html#text-references): See Section \@ref(sec:rmarkdown).
+
+# Metadata fields
+
+The basic YAML metadata fields for `title`, `subtitle`, `abstract`, `data` and `thanks` are available and behave similarly to the standard R Markdown template used in `rmarkdown::pdf_document()`. The `keywords` fields is also available and keywords are displayed after the abstract, not just added to the PDF's metadata fields. Additionally, a list of [JEL Codes](https://www.aeaweb.org/econlit/jelCodes.php?view=jel) can be added in the same way using the `jel` field. These are also displayed after the abstract.
+
+The `author` field works differently than in other templates, you need to add a `name` label, and an optional `affiliation` can be used to add affiliations and contact information.
+
+``` yaml
+author:
+  - name: First Author
+    affiliation: Institute of Whatever, <name@whatever.gov>
+  - name: Second Author
+    affiliation: Company, Inc., <name@company.com>
+```
+
+# Citations
+
+Add a `bibliography` field to the YAML frontmatter with the name of your bibliography file and cite works in the text using Pandoc's standard [citation forms](https://www.pandoc.org/MANUAL.html#citations), e.g. `@Xie2019` for @Xie2019. Both Bib\LaTeX{} and Pandoc's default `pandoc-citeproc` can be used for citation rendering but `pandoc-citeproc` is recommended. It is the only way currently to put a "References" section before the appendices. Unfortunately Pandoc is not aware of \LaTeX{}'s concept of appendices so you need to do the following incantations to add all sections to the paper in the right order, and with the right numbering.[^1]
+
+[^1]: I'm not aware of similar hacks for Bib\LaTeX{}.
+
+``` markdown
+This is the last sentence of the paper.
+
+# References {-}
+
+<div id="refs"></div>
+
+\appendix
+\clearpage
+
+# Appendix
+
+Start appendix here.
+```
+
+If you start your document with a template from this package, references and an appendix section are already set up.
+
+# References {-}
+
+<div id="refs"></div>
+
+\appendix
+\clearpage
+
+# Appendix
+
+This is the appendix, which is numbered differently. You can even make citations [@Xie2019]
+
+
+## Subsection

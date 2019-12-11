@@ -1,8 +1,8 @@
 ---
 title: Your Title
 author:
-  - name: Your Name
-    affiliation: Institute of Whatever, <name@institute.gov>
+  - name: First Author
+    affiliation: Institute of Whatever, <name@whatever.gov>
   - name: Second Author
     affiliation: Company, Inc., <name@company.com>
 date: \today
@@ -13,11 +13,9 @@ thanks: |
 output: aswp::aswp
 ---
 
-Write your introduction here, preferably without its own section title
+# Introduction
 
-# First section
-
-Continue here.
+...
 
 # Conclusion
 
@@ -32,6 +30,4 @@ The main part ends here. If you have references but no appendix, delete everythi
 
 # Appendix
 
-This is the appendix.
-
-## Subsection
+Appendix starts here.
