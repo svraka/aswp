@@ -13,6 +13,7 @@ LazyData: true
 RoxygenNote: 7.0.2
 Suggests:
     rmarkdown
+    stringi
 VignetteBuilder: knitr
 Imports:
     bookdown,
