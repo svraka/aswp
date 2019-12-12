@@ -27,6 +27,10 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+```{r setup, include = FALSE}
+library(aswp)
+```
+
 # First steps
 
 This package provides an `aswp()` function which is an R Markdown document format creator. To use it, you need to add `aswp::aswp` to the `output` field in the YAML metadata block of your R Markdown file. The recommended way to use this template is however by
@@ -43,16 +47,6 @@ Or use your editor's interface to this function:
 This provides a basic skeleton for the most important, and non-obvious features and helps setting up a more complex document with references and appendices which are often used in research papers.
 
 Then knit and compile like any other R Markdown document and you'll get a nicely formatted PDF. [TinyTeX](https://yihui.org/tinytex/) should automatically take care of the required \LaTeX{} packages.
-
-# R Markdown {#sec:rmarkdown}
-
-All the usual R Markdown features work.
-
-```{r deom}
-lm(mpg ~ disp + gear + carb, data = mtcars)
-```
-
-This package builds on [bookdown](https://github.com/rstudio/bookdown) to produce a single long-form document. This means chapters are not available but you can use cross-references with the `\@ref(...)` syntax for [equations](https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html#equations) and [text references](https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html#text-references): See Section \@ref(sec:rmarkdown).
 
 # Metadata fields
 
@@ -89,7 +83,49 @@ This is the last sentence of the paper.
 Start appendix here.
 ```
 
-If you start your document with a template from this package, references and an appendix section are already set up.
+If you start your document with a template from this package (`rmarkdown::draft()`), references and an appendix section are already set up.
+
+# R Markdown {#sec:rmarkdown}
+
+All the usual R Markdown features work but there are some extra functionalities.
+
+This package builds on [**bookdown**](https://github.com/rstudio/bookdown) to produce a single long-form document. This means chapters are not available but you can use cross-references with the `\@ref(...)` syntax for [equations](https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html#equations) and [text references](https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html#text-references): See Section \@ref(sec:rmarkdown).
+
+## Figure notes
+
+It is often useful to add a paragraph below a figure with notes, or references. This allows self-contained figures with short, concise captions yet you can add more context. Standard R Markdown and **knitr** doesn't support this for floating environments, like \LaTeX{} figures and tables.
+
+For this feature you need to load this package at the top your R Markdown document: `library(aswp)`. This will set up **knitr** hooks to insert `floatfoot` environments from the `floatrow` \LaTeX{} package by using `floatfoot` chunk options. See Figure \@ref(fig:plot-note) for a simple example.
+
+````markdown
+`r ''````{r chunk-label, fig.cap = "A figure caption.",
+floatfoot = "A figure note."}
+plot(cars)
+```
+````
+
+```{r plot-note, fig.cap = "A figure caption.", floatfoot = "A figure note.", fig.height = 3.5, echo = FALSE}
+par(mar = c(4, 4, .1, .1))
+plot(cars)
+```
+
+It is however quite inconvenient to write longer sentences, or even full paragraphs as **knitr** chunk options. And you'd have to write raw \LaTeX{} code and escape all the backslashes. Fortunately **bookdown** has a nice featre where you can use text references anywhere. Define them:
+
+```markdown
+(ref:foo) Define a text reference **here**.
+```
+
+Then you can use `(ref:foo)` as caption, or note. Both the caption and the note of Figure \@ref(fig:text-ref) were written in Markdown.
+
+```{r text-ref, fig.cap='(ref:text-ref-cap)', floatfoot = '(ref:text-ref-note)', fig.height = 3.5, echo = FALSE}
+par(mar = c(4, 4, .1, .1))
+plot(cars)
+
+n <- nrow(cars)
+```
+
+(ref:text-ref-cap) A scatterplot of the data `cars` using **base** R graphics.
+(ref:text-ref-note) **Note:** This my note from a *text reference*. It is a \emph{very} long note that should overflow into multiple rows. This is all possible thanks to **bookdown** [@Xie2019]. Figure \@ref(fig:plot-note) is much simpler. Let's mix some maths and R code, this dataset has $N = `r n`$ observations. Unfortunately this note [cannot be split into separate paragraphs](https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html#text-references) but that's probably OK.
 
 # References {-}
 
