@@ -13,7 +13,10 @@ thanks: |
   not not belong to any specific author. I'm standing on the shoulders
   of giants.
 abstract: |
-  This short vignette  shows all the features of this R Markdown template.
+  This short vignette gives an introduction to the `aswp` R Markdown
+  template. This template provides nice typography for a research
+  paper and offers a simple way to add paragraph-long notes to
+  figures.
 bibliography: aswp.bib
 keywords: [R Markdown, Reproducible research, Typography]
 jel: [C88, Y20]
