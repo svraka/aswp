@@ -33,6 +33,6 @@ Then knit and compile like any other R Markdown document and you'll get a nicely
 
 ## Further details
 
-See the [vignette](vignette/aswp.Rmd) for other functionalities and recommendations.
+See the [vignette](vignettes/aswp.Rmd) ([PDF](vignettes/aswp.pdf)) for other functionalities and recommendations.
 
 
