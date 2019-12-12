@@ -1,0 +1,8 @@
+.onAttach = function(libname, pkgname) {
+  # Replace the default knitr chunk hook
+  knitr::knit_hooks$set(chunk = hook_aswp())
+
+  # `knitr` defaults to markdown figures, so we need to tell it to use
+  # LaTeX. See <https://github.com/yihui/knitr/issues/1464> and <https://ulyngs.github.io/blog/posts/2019-02-01-how-to-create-your-own-chunk-options-in-r-markdown/>
+  knitr::knit_hooks$set(plot = knitr::hook_plot_tex)
+}
