@@ -137,9 +137,53 @@ n <- nrow(cars)
 \appendix
 \clearpage
 
-# Appendix
+# Tests
 
-This is the appendix, which is numbered differently. You can even make citations [@Xie2019]
+This is the appendix, which is numbered differently. This only serves for testing.
 
+## Typography
 
-## Subsection
+\newcommand{\blabla}{The quick brown fox jumped over the lazy dog. Now in Hungarian: Árvíztűrő tükörfúrógép, and a visual test: aáeéiíoóöőuúüő. "Simple quotes" “fancy quotes”, and in „continental European” -- just an aside -- and again – but with unicode dashes – to see if works. Now in an American fashion---with an m-dash. Ligatures and other OpenType features: prefix, quantitative, a maffia mafla fia.}
+
+\begin{description}
+  \item[Body:] \blabla
+  \item[Emphasis:] \emph{\blabla}
+  \item[Bold:] \textbf{\blabla}
+  % \item[Small caps:] \textsc{\blabla} % Not used
+  \item[Monospaced:] \texttt{\blabla}
+\end{description}
+
+### Subsubsection
+
+`r paste(stringi::stri_rand_lipsum(2), collapse = "\n\n")`
+
+#### Paragraph
+
+This is a paragraph that shouldn't be numbered.
+
+#### Another paragraph
+
+Default Pandoc templates redefine this but we're using standard \LaTeX{} titled paragraphs, where text starts on the same line as the title.
+
+## Link colours
+
+This is a [link to a web address](https://example.com), these are citations @Xie2019 and -@Xie2016 [@R2019; @XieAllaireGrolemund2018; @AllaireXieMcPhersonetal2019], this is an internal reference to Section \@ref(sec:rmarkdown), and this sentence ends with a footnote.[^fntest]
+
+[^fntest]: This is the footnote.
+
+## Maths
+
+Check spacing of indices and parentheses:
+$$ f_a(x)  = \sum_{n=0}^{\infty} \frac{f^{(n)}(a)}{n!} (x - a)^n \qquad
+   (x+a)^n = \sum_{k=0}^n \binom{n}{k} x^k a^{n-k} $$
+Unicode and traditional symbols:
+$$\text{x} \mathbf{x} x \qquad
+   \alpha \beta \gamma \delta \epsilon \Gamma \qquad
+   \mbfalpha \mbfbeta \mbfgamma$$
+
+## Numbers
+
+  * In math mode: $123{,}456{,}789.0$
+  * The same in a math environment as text: $\text{123,456,789.0}$
+  * In text mode 123456789.
+
