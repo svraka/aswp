@@ -14,9 +14,15 @@
 #' @export
 aswp <- function(...,
                  toc = FALSE,
+                 template = NULL,
                  keep_tex = TRUE) {
-  template <- system.file("rmarkdown", "templates", "aswp", "resources", "template.tex",
-                          package = "aswp")
+  # This is a little hack to set a different template if
+  # needed. Useful for testing changes in the template submodule.
+  if (is.null(template)) {
+    template <- system.file("rmarkdown", "templates", "aswp",
+                            "resources", "template.tex",
+                            package = "aswp")
+  }
 
   base <- inherit_pdf_document2(...,
                                 toc = toc,
