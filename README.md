@@ -18,7 +18,7 @@ remotes::install_github("svraka/aswp")
 
 This package provides an `aswp()` function which is an R Markdown document format creator. To use it, you need to add `aswp::aswp` to the `output` field in the YAML metadata block of your R Markdown file. The recommended way to use this template is however by
 
-```{r, eval = FALSE}
+``` r
 rmarkdown::draft("paper.Rmd", template = "aswp", package = "aswp")
 ```
 
