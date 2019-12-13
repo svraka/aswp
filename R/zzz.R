@@ -12,4 +12,10 @@
     knitr::opts_knit$set(eval.after = c("fig.cap", "fig.scap", "fig.subcap", "floatfoot")),
     envir = getNamespace("knitr")
   )
+
+  # Set up float types for which we support adding `floatfoot`s
+  evalq(
+    knitr::opts_knit$set(floatfoot.envs = c("figure", "table")),
+    envir = getNamespace("knitr")
+  )
 }
