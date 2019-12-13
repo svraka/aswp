@@ -16,7 +16,7 @@ abstract: |
   This short vignette gives an introduction to the `aswp` R Markdown
   template. This template provides nice typography for a research
   paper and offers a simple way to add paragraph-long notes to
-  figures.
+  figures and tables.
 bibliography: aswp.bib
 keywords: [R Markdown, Reproducible research, Typography]
 jel: [C88, Y20]
@@ -94,11 +94,11 @@ All the usual R Markdown features work but there are some extra functionalities.
 
 This package builds on [**bookdown**](https://github.com/rstudio/bookdown) to produce a single long-form document. This means chapters are not available but you can use cross-references with the `\@ref(...)` syntax for [equations](https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html#equations) and [text references](https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html#text-references): See Section \@ref(sec:rmarkdown).
 
-## Figure notes
+## Figure and Table notes
 
-It is often useful to add a paragraph below a figure with notes, or references. This allows self-contained figures with short, concise captions yet you can add more context. Standard R Markdown and **knitr** doesn't support this for floating environments, like \LaTeX{} figures and tables.
+It is often useful to add a paragraph below a figure, or table with notes, like explanations and references. This allows self-contained figures and tables with short, concise captions yet you can still add more context. Standard R Markdown and **knitr** doesn't support this for floating environments, like \LaTeX{} figures and tables.
 
-For this feature you need to load this package at the top your R Markdown document: `library(aswp)`. This will set up **knitr** hooks to insert `floatfoot` environments from the `floatrow` \LaTeX{} package by using `floatfoot` chunk options. See Figure \@ref(fig:plot-note) for a simple example.
+For this feature you need to load this package at the top your R Markdown document: `library(aswp)`. This will set up **knitr** hooks to insert `floatfoot` macros from the `floatrow` \LaTeX{} package into floating environments using `floatfoot` chunk options. See Figure \@ref(fig:plot-note) for a simple example.
 
 ````markdown
 `r ''````{r chunk-label, fig.cap = "A figure caption.",
@@ -112,7 +112,7 @@ par(mar = c(4, 4, .1, .1))
 plot(cars)
 ```
 
-It is however quite inconvenient to write longer sentences, or even full paragraphs as **knitr** chunk options. And you'd have to write raw \LaTeX{} code and escape all the backslashes. Fortunately **bookdown** has a nice featre where you can use text references anywhere. Define them:
+It is however quite inconvenient to write longer sentences, or even full paragraphs as **knitr** chunk options. And you'd have to write raw \LaTeX{} code and escape all the backslashes. Fortunately **bookdown** has a nice featre where you can use text references anywhere. First, define them:
 
 ```markdown
 (ref:foo) Define a text reference **here**.
@@ -129,6 +129,26 @@ n <- nrow(cars)
 
 (ref:text-ref-cap) A scatterplot of the data `cars` using **base** R graphics.
 (ref:text-ref-note) **Note:** This my note from a *text reference*. It is a \emph{very} long note that should overflow into multiple rows. This is all possible thanks to **bookdown** [@Xie2019]. Figure \@ref(fig:plot-note) is much simpler. Let's mix some maths and R code, this dataset has $N = `r n`$ observations. Unfortunately this note [cannot be split into separate paragraphs](https://bookdown.org/yihui/bookdown/markdown-extensions-by-bookdown.html#text-references) but that's probably OK.
+
+```{r table-note, echo = FALSE, floatfoot = '(ref:text-ref-note)'}
+knitr::kable(head(cars), booktabs = TRUE, caption = "This is a table")
+```
+
+The same option can be used with R code that generates other floating environments, like `table`s, see Tables \@ref(tab:table-note). The types of floating environments that make use of `floatfoot` options is defined in the **knitr** chunk option `floatfoot.envs`, where it can be extended if needed:
+
+```{r floatfoot.envs1}
+knitr::opts_knit$get("floatfoot.envs")
+```
+
+```{r floatfoot.envs2, eval = FALSE}
+knitr::opts_knit$set(floatfoot.envs = c("figure", "table", "myfloat"))
+```
+
+This can be useful for a number of packages and functions, like `knitr::kable()`, `stargazer::stargazer()`, `texreg::texreg()`, and `xtable::xtable()` that don't support any from of notes. Make sure these functions generate `table` environments and not `longtable`s, as they are not yet supported. Other packages, like **huxtable** come with their own implementation for notes, while **kableExtra** has support for footnotes in tables. This package is mostly orthogonal to these features and the different notes they can be mixed. Here, we add notes with text at footnote size and the same width as the text column. This tends to look good with paragraph-long notes.
+
+In these packages captions are defined using function arguments inside the code chunk. Support for markup in these captions varies but simple captions usually don't require additional markup, while notes can be written using text references.
+
+As an added convenience, **knitr** hooks are set up to evaluate after the code chunk.
 
 # References {-}
 
