@@ -175,7 +175,7 @@ This is the appendix, which is numbered differently. This only serves for testin
 
 ### Subsubsection
 
-`r paste(stringi::stri_rand_lipsum(2), collapse = "\n\n")`
+`r set.seed(123); paste(stringi::stri_rand_lipsum(2), collapse = "\n\n")`
 
 #### Paragraph
 
