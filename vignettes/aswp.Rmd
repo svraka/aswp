@@ -53,7 +53,7 @@ Then knit and compile like any other R Markdown document and you'll get a nicely
 
 # Metadata fields
 
-The basic YAML metadata fields for `title`, `subtitle`, `abstract`, `data` and `thanks` are available and behave similarly to the standard R Markdown template used in `rmarkdown::pdf_document()`. The `keywords` fields is also available and keywords are displayed after the abstract, not just added to the PDF's metadata fields. Additionally, a list of [JEL Codes](https://www.aeaweb.org/econlit/jelCodes.php?view=jel) can be added in the same way using the `jel` field. These are also displayed after the abstract.
+The basic YAML metadata fields for `title`, `subtitle`, `abstract`, `data` and `thanks` are available and behave similarly to the standard R Markdown template used in `rmarkdown::pdf_document()`. The `keywords` field is also available and keywords are displayed after the abstract, not just added to the PDF's metadata fields. Additionally, a list of [JEL Codes](https://www.aeaweb.org/econlit/jelCodes.php?view=jel) can be added in the same way using the `jel` field. These are also displayed after the abstract.
 
 The `author` field works differently than in other templates, you need to add a `name` label, and an optional `affiliation` can be used to add affiliations and contact information.
 
@@ -96,9 +96,9 @@ This package builds on [**bookdown**](https://github.com/rstudio/bookdown) to pr
 
 ## Figure and Table notes
 
-It is often useful to add a paragraph below a figure, or table with notes, like explanations and references. This allows self-contained figures and tables with short, concise captions yet you can still add more context. Standard R Markdown and **knitr** doesn't support this for floating environments, like \LaTeX{} figures and tables.
+It is often useful to add a paragraph below a figure, or table with notes, including explanations, or references. This allows self-contained figures and tables with short, concise captions yet you can still add more context. Standard R Markdown and **knitr** doesn't support this for floating environments, like \LaTeX{} figures and tables.
 
-For this feature you need to load this package at the top your R Markdown document: `library(aswp)`. This will set up **knitr** hooks to insert `floatfoot` macros from the `floatrow` \LaTeX{} package into floating environments using `floatfoot` chunk options. See Figure \@ref(fig:plot-note) for a simple example.
+For this feature you need to load this package at the top your R Markdown document: `library(aswp)`. This will set up **knitr** hooks to insert `floatfoot` macros from the **floatrow** \LaTeX{} package into floating environments using `floatfoot` chunk options. See Figure \@ref(fig:plot-note) for a simple example, produced by the following markup and code:
 
 ````markdown
 `r ''````{r chunk-label, fig.cap = "A figure caption.",
@@ -112,7 +112,7 @@ par(mar = c(4, 4, .1, .1))
 plot(cars)
 ```
 
-It is however quite inconvenient to write longer sentences, or even full paragraphs as **knitr** chunk options. And you'd have to write raw \LaTeX{} code and escape all the backslashes. Fortunately **bookdown** has a nice featre where you can use text references anywhere. First, define them:
+It is however quite inconvenient to write longer sentences, or even full paragraphs as **knitr** chunk options. And you'd have to write raw \LaTeX{} code and escape all the backslashes. Fortunately **bookdown** has a nice feature where you can use text references anywhere. First, define them:
 
 ```markdown
 (ref:foo) Define a text reference **here**.
@@ -134,11 +134,13 @@ n <- nrow(cars)
 knitr::kable(head(cars), booktabs = TRUE, caption = "This is a table")
 ```
 
-The same option can be used with R code that generates other floating environments, like `table`s, see Tables \@ref(tab:table-note). The types of floating environments that make use of `floatfoot` options is defined in the **knitr** chunk option `floatfoot.envs`, where it can be extended if needed:
+The same option can be used with R code that generates other floating environments, like `table`s, see Table \@ref(tab:table-note). The list of floating environments that make use of `floatfoot` options is defined in the **knitr** chunk option `floatfoot.envs`:
 
 ```{r floatfoot.envs1}
 knitr::opts_knit$get("floatfoot.envs")
 ```
+
+It can be extended if needed:
 
 ```{r floatfoot.envs2, eval = FALSE}
 knitr::opts_knit$set(floatfoot.envs = c("figure", "table", "myfloat"))
@@ -187,7 +189,7 @@ Default Pandoc templates redefine this but we're using standard \LaTeX{} titled 
 
 ## Link colours
 
-This is a [link to a web address](https://example.com), these are citations @Xie2019 and -@Xie2016 [@R2019; @XieAllaireGrolemund2018; @AllaireXieMcPhersonetal2019], this is an internal reference to Section \@ref(sec:rmarkdown), and this sentence ends with a footnote.[^fntest]
+This is a [link to a web address](https://example.com), these are citations @Xie2019 and -@Xie2016, [@R2019; @XieAllaireGrolemund2018; @AllaireXieMcPhersonetal2019], this is an internal reference to Section \@ref(sec:rmarkdown), and this sentence ends with a footnote.[^fntest]
 
 [^fntest]: This is the footnote.
 
