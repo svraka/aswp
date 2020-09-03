@@ -216,7 +216,7 @@ $$\text{x} \mathbf{x} x \qquad
 
 # Tables {#sec:appendix-tables}
 
-\@ref(tab:table-note) is a simple table, that doesn't require any additional setup, besides specifying captions and labels. In other cases table-generating functions might need more customizations. In general, functions should output only a basic skeleton, with a `table` (or similar) environment, without modifying formatting, or loading \LaTeX{} packages. The following code and markup generates Table \@ref(tab:texreg) (**texreg** was already loaded at the top of this document).
+Table \@ref(tab:table-note) is a simple table, that doesn't require any additional setup, besides specifying captions and labels. In other cases table-generating functions might need more customizations. In general, functions should output only a basic skeleton, with a `table` (or similar) environment, without modifying formatting, or loading \LaTeX{} packages. The following code and markup generates Table \@ref(tab:texreg) (**texreg** was already loaded at the top of this document).
 
 ```{r texreg, results = "asis", floatfoot = '(ref:texreg-note)'}
 models <- list(
