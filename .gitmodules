@@ -1,3 +1,0 @@
-[submodule "aswp-template"]
-	path = inst/rmarkdown/templates/aswp/resources
-	url = https://github.com/svraka/aswp-template.git
